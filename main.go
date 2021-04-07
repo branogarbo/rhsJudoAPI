@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
+	"fmt"
 	"log"
 
 	du "github.com/branogarbo/rhsJudoAPI/dataUtil"
@@ -17,7 +17,7 @@ var (
 
 func main() {
 	server = fiber.New()
-	totalWorkouts, err = du.ReadTotalWorkoutStruct()
+	totalWorkouts, err = du.ReadTotalWorkoutFile()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -26,24 +26,31 @@ func main() {
 		return c.JSON(totalWorkouts)
 	})
 
-	server.Post("/all", func(c *fiber.Ctx) error {
+	server.Post("/all/mutate", func(c *fiber.Ctx) error {
 		var (
 			reqBody []byte
+			errMsg  string
 		)
 
 		reqBody = c.Body()
 
-		if !json.Valid(reqBody) {
-
-			return errors.New("incoming data is invalid")
+		err = json.Unmarshal(reqBody, &totalWorkouts)
+		if err != nil {
+			errMsg = fmt.Sprintf("%v", err)
+			return c.SendString(errMsg)
 		}
 
-		err = du.WriteTotalWorkoutStruct(reqBody)
+		err = du.WriteTotalWorkout(reqBody)
 		if err != nil {
-			return err
+			errMsg = fmt.Sprintf("%v", err)
+			return c.SendString(errMsg)
 		}
 
 		return c.SendString("success")
+	})
+
+	server.Get("*", func(c *fiber.Ctx) error {
+		return c.SendStatus(fiber.StatusNotFound)
 	})
 
 	log.Fatal(server.Listen(":3000"))

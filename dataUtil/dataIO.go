@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func ReadTotalWorkoutStruct() (TotalWorkouts, error) {
+func ReadTotalWorkoutFile() (TotalWorkouts, error) {
 	var (
 		totalWorkouts TotalWorkouts
 		jsonFile      []byte
@@ -25,17 +25,12 @@ func ReadTotalWorkoutStruct() (TotalWorkouts, error) {
 	return totalWorkouts, nil
 }
 
-func WriteTotalWorkoutStruct(mutatedTotalWorkouts interface{}) error {
+func WriteTotalWorkout(mutatedTotalWorkouts []byte) error {
 	var (
-		err       error
-		jsonBytes []byte
+		err error
 	)
-	jsonBytes, err = json.Marshal(mutatedTotalWorkouts)
-	if err != nil {
-		return err
-	}
 
-	err = os.WriteFile("./data/judoWorkoutLog", jsonBytes, 0666)
+	err = os.WriteFile("./data/judoWorkoutLog.json", mutatedTotalWorkouts, 0666)
 	if err != nil {
 		return err
 	}
