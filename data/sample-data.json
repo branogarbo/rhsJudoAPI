@@ -1,0 +1,51 @@
+{
+   "date": "4/7",
+   "participants": {
+      "jin": {
+         "deadlift": [ 75 ],
+         "squat": [ 45, 95 ],
+         "lunges": [ 45, 75 ],
+         "plate-drills": [ 25 ]
+      },
+      "alu": {
+         "lunges": [ 45 ],
+         "quad-machine": [ 40 ],
+         "db-curls": [ 10 ],
+         "plate-drills": [ 10 ]
+      },
+      "dayven": {
+         "lat-pulldowns": [ 80 ],
+         "rowing-machine": [ 80 ],
+         "one-arm-bent-over-rows": [ 50 ],
+         "ez-bar-curl": [ 40 ],
+         "db-curls": [ 25 ],
+         "plate-drills": [ 25 ]
+      },
+      "zeke": {
+         "lat-pulldowns": [ 100 ],
+         "rowing-machine": [ 100 ],
+         "one-arm-bent-over-rows": [ 35 ],
+         "ez-bar-curl": [ 40 ],
+         "db-curls": [ 20 ],
+         "plate-drills": [ 25 ]
+      },
+      "caelin": {
+         "squat": [ 95 ],
+         "deadlift": [ 95 ],
+         "falling-off-the-bench": [ 22 ],
+         "plate drills": [ 15 ]
+      },
+      "matt": {
+         "deadlift": [ 135 ],
+         "squat": [ 45, 95 ],
+         "lunges": [ 45, 75 ],
+         "plate drills": [ 35, 25 ]
+      },
+      "yalexia": {
+         "lunges": [ 45 ],
+         "quad-machine": [ 40 ],
+         "db-curls": [ 10 ],
+         "plate-drills": [ 15 ]               
+      }
+   }
+}
