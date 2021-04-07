@@ -49,6 +49,36 @@ func main() {
 		return c.SendString("success")
 	})
 
+	server.Get("/:weekNum/:participant?/:exercise?", func(c *fiber.Ctx) error {
+		var (
+			errMsg       string
+			weekNum, err = c.ParamsInt("weekNum")
+			participant  = c.Params("participant")
+			exercise     = c.Params("exercise")
+		)
+		if err != nil {
+			errMsg = fmt.Sprintf("%v", err)
+			return c.SendString(errMsg)
+		}
+
+		if weekNum < 0 || weekNum == len(totalWorkouts) {
+			return c.SendString("weekNum parameter is out of range")
+		}
+
+		if participant == "" {
+			targetData := totalWorkouts[weekNum]
+
+			return c.JSON(targetData)
+		} else {
+			targetData := totalWorkouts[weekNum].Participants[participant]
+			if exercise == "" {
+				return c.JSON(targetData)
+			} else {
+				return c.JSON(targetData[exercise])
+			}
+		}
+	})
+
 	server.Get("*", func(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusNotFound)
 	})
