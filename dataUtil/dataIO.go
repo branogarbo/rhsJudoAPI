@@ -25,12 +25,18 @@ func ReadTotalWorkoutFile() (TotalWorkouts, error) {
 	return totalWorkouts, nil
 }
 
-func WriteTotalWorkout(mutatedTotalWorkouts []byte) error {
+func WriteTotalWorkout(mutatedTotalWorkouts TotalWorkouts) error {
 	var (
-		err error
+		err                       error
+		mutatedTotalWorkoutsBytes []byte
 	)
 
-	err = os.WriteFile("./data/judoWorkoutLog.json", mutatedTotalWorkouts, 0666)
+	mutatedTotalWorkoutsBytes, err = json.Marshal(mutatedTotalWorkouts)
+	if err != nil {
+		return err
+	}
+
+	err = os.WriteFile("./data/judoWorkoutLog.json", mutatedTotalWorkoutsBytes, 0666)
 	if err != nil {
 		return err
 	}

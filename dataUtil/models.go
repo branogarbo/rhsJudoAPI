@@ -7,6 +7,6 @@ type ParticipantExercises map[string]Exercises
 type TotalWorkouts []PracticeWorkout
 
 type PracticeWorkout struct {
-	Date         string
-	Participants ParticipantExercises
+	Date         string               `json:"date"`
+	Participants ParticipantExercises `json:"participants"`
 }
